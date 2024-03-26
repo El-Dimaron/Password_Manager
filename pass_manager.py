@@ -40,33 +40,38 @@ def main():
 
 
 def show_pass_list():
-    csv_obj = open(file_name, "r")
-    csv_list = csv_obj.readlines()
-    titles_list = []
-
-    for password in range(len(csv_list)):
-        title_name = csv_list[password].split(",")[0]
-        titles_list.append(title_name)
-    print(f"Your current list of titles: {titles_list}")
+    try:
+        csv_obj = open(file_name, "r")
+        csv_list = csv_obj.readlines()
+        titles_list = []
+        for password in range(len(csv_list)):
+            title_name = csv_list[password].split(",")[0]
+            titles_list.append(title_name)
+        print(f"Your current list of titles: {titles_list}")
+    except FileNotFoundError:
+        return print("Please be advised that no file is yet created. Create a new password [new] to view the existing titles.")
 
 
 def show_exact_pass():
-    csv_obj = open(file_name, "r")
-    csv_list = csv_obj.readlines()
-    user_pass_title = args.title
-    message = "Sorry, mentioned title is not in the list. Please try again."
+    try:
+        csv_obj = open(file_name, "r")
+        csv_list = csv_obj.readlines()
+        user_pass_title = args.title
+        message = "Sorry, mentioned title is not in the list. Please try again."
 
-    for password in range(len(csv_list)):
-        # title = csv_list[password].split(",")         # each set
-        title_name = csv_list[password].split(",")[0]   # individual title name
+        for password in range(len(csv_list)):
+            # title = csv_list[password].split(",")         # each set
+            title_name = csv_list[password].split(",")[0]   # individual title name
 
-        if title_name.lower().strip() == user_pass_title.lower().strip():
-            message_function = duplicate_login_checker_list(user_pass_title, csv_list)
-            message_return = f"""title: {message_function[0]}
+            if title_name.lower().strip() == user_pass_title.lower().strip():
+                message_function = duplicate_login_checker_list(user_pass_title, csv_list)
+                message_return = f"""title: {message_function[0]}
 login: {message_function[1]}
 password: {message_function[2]}"""
-            return print(message_return)
-    return print(message)
+                return print(message_return)
+        return print(message)
+    except FileNotFoundError:
+        return print("Please be advised that no file is yet created. Create a new password [new] to view the existing titles.")
 
 
 def duplicate_login_checker_list(user_title, csv_list):
