@@ -1,10 +1,10 @@
 Code is used as an in-terminal password manager.
 
 When executing a code, there are 2 options:
-1. Create a new password ([new]);
-2. View created password(s) ([list]).
+1. Create a new password [new];
+2. View created password(s) [list].
 
-When creating a new password, there are two optional arguments that needs to be specified [--title] and [--login].
+When creating a new password, there are two optional arguments that need to be specified [--title] and [--login].
 
 Additional optional arguments can be added to change the password creation parameters.
 - -l, --letters - if True, both upper and lower registers letters will be used, if False - only lower ones (default, True);
